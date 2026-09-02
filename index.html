@@ -112,7 +112,7 @@
     </section>
   </main>
   <footer>
-    <p>WalkProof · getwalkproof.com · Software for building-service contractors.</p>
+    <p>WalkProof · Software for building-service contractors.</p>
     <p>Photos of occupied sites stay your company’s records. We do not certify that a building is clean, safe, or code-compliant.</p>
   </footer>
   <script>
@@ -137,7 +137,7 @@
           form.querySelectorAll('input,select,button').forEach(el => el.disabled = true);
           ok.style.display = 'block';
         } else {
-          err.textContent = json.message || 'Could not send. Email getwalkproof from the address you entered, or try again.';
+          err.textContent = json.message || 'Could not send. Try again, or use the work email you entered.';
           err.style.display = 'block';
         }
       } catch (x) {
