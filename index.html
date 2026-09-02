@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WalkProof — janitorial SLA / QC for building-service contractors</title>
+  <meta name="description" content="Checklist walks, timestamped photos, and scored reports for building-service contractors. You inspect. Your supervisor attests. WalkProof records.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://diont1.github.io/walkproof/">
+  <style>
+    :root { --ink:#122018; --muted:#4a5c52; --line:#d7e0da; --bg:#f6f8f6; --card:#fff; --accent:#1f6b45; --accent-2:#163d2b; }
+    * { box-sizing: border-box; }
+    body { margin:0; font: 17px/1.5 ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif; color:var(--ink); background:var(--bg); }
+    header, main, footer { max-width: 920px; margin: 0 auto; padding: 0 24px; }
+    header { display:flex; justify-content:space-between; align-items:center; padding-top:28px; padding-bottom:8px; }
+    .logo { font-weight:720; letter-spacing:-0.02em; font-size:22px; color:var(--accent-2); text-decoration:none; }
+    .nav a { color:var(--muted); text-decoration:none; font-size:15px; }
+    h1 { font-size: clamp(32px, 5vw, 48px); line-height:1.12; letter-spacing:-0.03em; margin: 36px 0 12px; }
+    .lede { font-size:19px; color:var(--muted); max-width: 62ch; margin:0 0 28px; }
+    .hero { display:grid; grid-template-columns: 1.15fr .85fr; gap: 36px; align-items:start; padding: 12px 0 48px; }
+    @media (max-width: 800px) { .hero { grid-template-columns: 1fr; } }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:22px; box-shadow: 0 8px 30px rgba(18,32,24,.04); }
+    label { display:block; font-size:13px; font-weight:650; margin: 12px 0 6px; }
+    input, select { width:100%; padding:11px 12px; border:1px solid var(--line); border-radius:10px; font: inherit; background:#fff; }
+    button { width:100%; margin-top:16px; background:var(--accent); color:#fff; border:0; border-radius:10px; padding:13px 16px; font: inherit; font-weight:700; cursor:pointer; }
+    button:hover { background:var(--accent-2); }
+    .fine { font-size:13px; color:var(--muted); margin-top:10px; }
+    .ok { display:none; background:#e8f6ee; color:var(--accent-2); border-radius:10px; padding:12px; margin-top:10px; }
+    .err { display:none; background:#fdecec; color:#7a1f1f; border-radius:10px; padding:12px; margin-top:10px; }
+    .pills { display:flex; flex-wrap:wrap; gap:8px; margin: 18px 0 0; }
+    .pill { font-size:13px; background:#fff; border:1px solid var(--line); padding:6px 10px; border-radius:999px; color:var(--muted); }
+    section { padding: 8px 0 40px; }
+    h2 { font-size:26px; letter-spacing:-0.02em; margin: 0 0 10px; }
+    table { width:100%; border-collapse: collapse; background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+    th, td { text-align:left; padding:12px 14px; border-bottom:1px solid var(--line); vertical-align:top; }
+    th { font-size:13px; color:var(--muted); font-weight:650; background:#eef3ef; }
+    .not { color:var(--muted); font-size:15px; }
+    ul.plain { padding-left: 1.1em; color:var(--muted); }
+    footer { padding: 28px 24px 48px; color:var(--muted); font-size:13px; }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="logo" href="/walkproof/">WalkProof</a>
+    <nav class="nav"><a href="#trial">Start 30-day trial</a></nav>
+  </header>
+  <main>
+    <div class="hero">
+      <div>
+        <h1>Photo’d, scored walkthroughs. Your people still attest.</h1>
+        <p class="lede">WalkProof is software for building-service contractors. Inspectors walk the site with a checklist. Photos are timestamped. The client gets a scored report. WalkProof does not inspect buildings, certify cleanliness, or replace a license.</p>
+        <div class="pills">
+          <span class="pill">30-day trial, no card</span>
+          <span class="pill">Starter $249/mo · 2 inspectors</span>
+          <span class="pill">You attest. We record.</span>
+        </div>
+      </div>
+      <form id="trial" class="card" action="#" method="post">
+        <strong>Start a 30-day trial</strong>
+        <p class="fine" style="margin-top:6px">No credit card. No sales call required.</p>
+        <label for="name">Your name</label>
+        <input id="name" name="name" required autocomplete="name">
+        <label for="company">Company</label>
+        <input id="company" name="company" required autocomplete="organization">
+        <label for="email">Work email</label>
+        <input id="email" name="email" type="email" required autocomplete="email">
+        <label for="inspectors">Inspectors</label>
+        <select id="inspectors" name="inspectors" required>
+          <option value="1-2">1–2</option>
+          <option value="3-10">3–10</option>
+          <option value="11+">11+</option>
+        </select>
+        <button type="submit">Start 30-day trial</button>
+        <p class="fine">By starting you confirm a supervisor at your company will attest each report. WalkProof is not a licensed inspection, fire/life-safety inspection, or background check.</p>
+        <div class="ok" id="ok">Trial request received. We’ll follow up at the work email you entered. No card was charged.</div>
+        <div class="err" id="err"></div>
+      </form>
+    </div>
+
+    <section>
+      <h2>What you get</h2>
+      <ul class="plain">
+        <li>Mobile checklist walks (restrooms, floors, lobby, trash, and your own items).</li>
+        <li>Timestamped photos attached to each area.</li>
+        <li>A scored report PDF your app generates for the building client.</li>
+        <li>Seats for inspectors. A supervisor on your side confirms (“attests”) the report.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Price</h2>
+      <table>
+        <thead><tr><th>Plan</th><th>What’s in it</th><th>Price</th></tr></thead>
+        <tbody>
+          <tr><td>Starter</td><td>2 inspectors. Extra inspector +$49/mo.</td><td><strong>$249/mo</strong></td></tr>
+          <tr><td>Standard</td><td>10 inspectors.</td><td><strong>$499/mo</strong></td></tr>
+          <tr><td>Trial</td><td>30 days. No card. No setup fee.</td><td><strong>$0</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="not">We do not promise you will keep an account, pass an RFP, or meet a hospital or school requirement. Those outcomes are yours.</p>
+    </section>
+
+    <section>
+      <h2>What WalkProof is not</h2>
+      <ul class="plain">
+        <li>Not a licensed home, building, or fire inspection.</li>
+        <li>Not NFPA software and not a fire-marshal substitute.</li>
+        <li>Not employee GPS tracking (v1 has none).</li>
+        <li>Not a background check or FCRA product.</li>
+        <li>Not a downloadable SOP, kit, or spreadsheet.</li>
+      </ul>
+    </section>
+  </main>
+  <footer>
+    <p>WalkProof · getwalkproof.com · Software for building-service contractors.</p>
+    <p>Photos of occupied sites stay your company’s records. We do not certify that a building is clean, safe, or code-compliant.</p>
+  </footer>
+  <script>
+    const form = document.getElementById('trial');
+    const ok = document.getElementById('ok');
+    const err = document.getElementById('err');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      ok.style.display = 'none';
+      err.style.display = 'none';
+      const data = Object.fromEntries(new FormData(form).entries());
+      data._subject = 'WalkProof trial (no card)';
+      data._template = 'table';
+      try {
+        const res = await fetch('https://formsubmit.co/ajax/thomasjdion3@gmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const json = await res.json().catch(() => ({}));
+        if (res.ok) {
+          form.querySelectorAll('input,select,button').forEach(el => el.disabled = true);
+          ok.style.display = 'block';
+        } else {
+          err.textContent = json.message || 'Could not send. Email getwalkproof from the address you entered, or try again.';
+          err.style.display = 'block';
+        }
+      } catch (x) {
+        err.textContent = 'Network error. Try again, or email from the work address you entered.';
+        err.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
