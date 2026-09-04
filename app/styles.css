@@ -1,512 +1,199 @@
-/* WalkProof demo PWA — mobile-first */
+/* WalkProof demo — mobile-first greens #1f6b45 / #163d2b */
 :root {
-  --wp-green: #1f6b45;
-  --wp-green-dark: #163d2b;
-  --wp-green-light: #2a8f5c;
-  --wp-bg: #f4f7f5;
-  --wp-card: #ffffff;
-  --wp-text: #1a1a1a;
-  --wp-muted: #5a6b62;
-  --wp-border: #d5e0da;
-  --wp-danger: #b33a3a;
-  --wp-warn: #c47b1a;
+  --green: #1f6b45;
+  --green-dark: #163d2b;
+  --green-soft: #e8f3ec;
+  --ink: #122018;
+  --muted: #5a6b60;
+  --line: #d5e0d9;
+  --warn: #8a5a00;
+  --fail: #a33;
+  --pass: #1f6b45;
+  --bg: #f6faf7;
+  --card: #fff;
   --radius: 12px;
-  --shadow: 0 2px 8px rgba(22, 61, 43, 0.08);
+  --shadow: 0 1px 3px rgba(22, 61, 43, 0.08);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
-
 *, *::before, *::after { box-sizing: border-box; }
-
-html, body {
+html { -webkit-text-size-adjust: 100%; }
+body {
   margin: 0;
-  padding: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.45;
-  color: var(--wp-text);
-  background: var(--wp-bg);
-  min-height: 100%;
-  -webkit-tap-highlight-color: transparent;
-}
-
-button, input, textarea, select {
-  font: inherit;
-}
-
-.hidden { display: none !important; }
-
-/* —— Screens —— */
-.screen {
+  color: var(--ink);
+  background: var(--bg);
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
 }
-
-/* —— Login —— */
-#screen-login {
-  background: linear-gradient(165deg, var(--wp-green-dark) 0%, var(--wp-green) 55%, #247a4f 100%);
-  color: #fff;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-}
-
-.login-card {
-  width: 100%;
-  max-width: 400px;
-  background: var(--wp-card);
-  color: var(--wp-text);
-  border-radius: 16px;
-  padding: 1.75rem 1.5rem;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.25);
-}
-
-.login-brand {
-  text-align: center;
-  margin-bottom: 1.25rem;
-}
-
-.login-brand .logo-mark {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  background: var(--wp-green);
-  color: #fff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 1.35rem;
-  letter-spacing: -0.02em;
-  margin-bottom: 0.65rem;
-}
-
-.login-brand h1 {
-  margin: 0;
-  font-size: 1.5rem;
-  color: var(--wp-green-dark);
-}
-
-.login-brand p {
-  margin: 0.35rem 0 0;
-  color: var(--wp-muted);
-  font-size: 0.9rem;
-}
-
-.field { margin-bottom: 0.9rem; }
-
-.field label {
-  display: block;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--wp-muted);
-  margin-bottom: 0.3rem;
-}
-
-.field input {
-  width: 100%;
-  padding: 0.7rem 0.85rem;
-  border: 1px solid var(--wp-border);
-  border-radius: 8px;
-  background: #fff;
-}
-
-.field input:focus {
-  outline: 2px solid var(--wp-green);
-  outline-offset: 1px;
-  border-color: var(--wp-green);
-}
-
-.demo-creds {
-  background: #eef6f1;
-  border: 1px solid var(--wp-border);
-  border-radius: 8px;
-  padding: 0.75rem 0.9rem;
-  font-size: 0.8rem;
-  margin: 0 0 1rem;
-  color: var(--wp-green-dark);
-}
-
-.demo-creds strong { display: block; margin-bottom: 0.25rem; }
-.demo-creds code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  background: #fff;
-  padding: 0.05rem 0.3rem;
-  border-radius: 4px;
-  font-size: 0.78rem;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  padding: 0.7rem 1.1rem;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background 0.15s, transform 0.1s;
-}
-
-.btn:active { transform: scale(0.98); }
-.btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-.btn-primary {
-  background: var(--wp-green);
-  color: #fff;
-  width: 100%;
-}
-
-.btn-primary:hover:not(:disabled) { background: var(--wp-green-light); }
-
-.btn-secondary {
-  background: #e8f0eb;
-  color: var(--wp-green-dark);
-}
-
-.btn-secondary:hover:not(:disabled) { background: #d5e5db; }
-
-.btn-ghost {
-  background: transparent;
-  color: var(--wp-green);
-  padding: 0.45rem 0.65rem;
-}
-
-.btn-danger {
-  background: var(--wp-danger);
-  color: #fff;
-}
-
-.btn-sm {
-  padding: 0.4rem 0.75rem;
-  font-size: 0.875rem;
-}
-
-.error-msg {
-  color: var(--wp-danger);
-  font-size: 0.85rem;
-  margin: 0 0 0.75rem;
-  min-height: 1.2em;
-}
-
-/* —— App shell —— */
-#screen-app {
-  background: var(--wp-bg);
-}
-
-.app-header {
-  background: var(--wp-green-dark);
-  color: #fff;
-  padding: 0.85rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  position: sticky;
-  top: 0;
-  z-index: 20;
-}
-
-.app-header .brand {
-  font-weight: 700;
-  font-size: 1.05rem;
-  letter-spacing: -0.01em;
-}
-
-.app-header .user-chip {
-  font-size: 0.75rem;
-  opacity: 0.9;
-  text-align: right;
-}
-
-.app-header .user-chip .role {
-  display: block;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  font-size: 0.65rem;
-  opacity: 0.75;
-}
-
-.app-main {
+img { max-width: 100%; height: auto; display: block; }
+button, input, select, textarea { font: inherit; }
+a { color: var(--green); }
+#app {
   flex: 1;
-  padding: 1rem;
-  padding-bottom: calc(1rem + var(--safe-bottom));
-  max-width: 640px;
   width: 100%;
+  max-width: 560px;
   margin: 0 auto;
+  padding: 16px 16px calc(24px + var(--safe-bottom));
 }
-
-.app-footer {
-  padding: 0.85rem 1rem calc(0.85rem + var(--safe-bottom));
-  font-size: 0.7rem;
-  color: var(--wp-muted);
-  text-align: center;
-  border-top: 1px solid var(--wp-border);
-  background: #fff;
+.legal-footer {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 12px 16px calc(16px + var(--safe-bottom));
+  font-size: 11px;
   line-height: 1.4;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  background: #fff;
 }
-
-.view { display: none; }
-.view.active { display: block; }
-
-.view-title {
-  margin: 0 0 0.35rem;
-  font-size: 1.35rem;
-  color: var(--wp-green-dark);
+.demo-banner {
+  background: #fff8e6;
+  color: var(--warn);
+  border: 1px solid #f0d9a0;
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  font-size: 13px;
+  margin-bottom: 16px;
 }
-
-.view-sub {
-  margin: 0 0 1rem;
-  color: var(--wp-muted);
-  font-size: 0.9rem;
+.app-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
 }
-
+.app-header h1 { margin: 0; font-size: 1.35rem; color: var(--green-dark); }
+.app-header .sub { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+.tag {
+  display: inline-block; font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.03em; background: var(--green-soft); color: var(--green-dark);
+  padding: 4px 8px; border-radius: 999px; white-space: nowrap;
+}
 .card {
-  background: var(--wp-card);
-  border: 1px solid var(--wp-border);
-  border-radius: var(--radius);
-  padding: 1rem;
-  margin-bottom: 0.85rem;
-  box-shadow: var(--shadow);
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 14px; box-shadow: var(--shadow); margin-bottom: 12px;
 }
-
-.card h3 {
-  margin: 0 0 0.5rem;
-  font-size: 1rem;
-  color: var(--wp-green-dark);
+.card h2, .card h3 { margin: 0 0 8px; font-size: 1.05rem; color: var(--green-dark); }
+.muted { color: var(--muted); font-size: 13px; }
+.stack { display: flex; flex-direction: column; gap: 10px; }
+.row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.list-item {
+  display: block; width: 100%; text-align: left; background: var(--card);
+  border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px;
+  cursor: pointer; box-shadow: var(--shadow);
 }
-
-.row-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
+.list-item:hover, .list-item:focus-visible { border-color: var(--green); outline: none; }
+.list-item .title { font-weight: 600; color: var(--ink); }
+.list-item .meta { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.status-pill {
+  font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px;
+  background: var(--green-soft); color: var(--green-dark);
 }
-
-.walk-list { list-style: none; margin: 0; padding: 0; }
-
-.walk-list li {
-  background: var(--wp-card);
-  border: 1px solid var(--wp-border);
-  border-radius: var(--radius);
-  padding: 0.85rem 1rem;
-  margin-bottom: 0.6rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.75rem;
-  cursor: pointer;
-  box-shadow: var(--shadow);
+.status-pill.submitted { background: #fff3d6; color: var(--warn); }
+.status-pill.in_progress { background: #e8eef8; color: #2a4a7a; }
+.status-pill.attested { background: var(--green-soft); color: var(--green-dark); }
+label { display: block; font-size: 13px; font-weight: 600; color: var(--green-dark); margin-bottom: 4px; }
+.field { margin-bottom: 12px; }
+.field input, .field select, .field textarea, .checklist-item .item-note {
+  width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px;
+  background: #fff; color: var(--ink);
 }
-
-.walk-list li:active { background: #eef6f1; }
-
-.walk-list .meta {
-  font-size: 0.8rem;
-  color: var(--wp-muted);
+.field textarea { min-height: 72px; resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus, .checklist-item .item-note:focus {
+  outline: 2px solid var(--green); outline-offset: 1px; border-color: var(--green);
 }
-
-.badge {
-  display: inline-block;
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 0.2rem 0.5rem;
-  border-radius: 999px;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
+.fixed-value {
+  padding: 10px 12px; background: var(--green-soft); border-radius: 10px;
+  font-weight: 500; color: var(--green-dark);
 }
-
-.badge-open { background: #fff3cd; color: #856404; }
-.badge-done { background: #d4edda; color: #155724; }
-.badge-attested { background: #cce5ff; color: #004085; }
-
-.score-pill {
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: var(--wp-green);
-  min-width: 3ch;
-  text-align: right;
+.role-picker { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.role-picker label.choice {
+  display: flex; align-items: center; gap: 8px; padding: 12px; border: 1px solid var(--line);
+  border-radius: 10px; background: #fff; font-weight: 500; cursor: pointer; margin: 0;
 }
-
-/* —— Area list —— */
-.area-list { list-style: none; margin: 0; padding: 0; }
-
-.area-list li {
-  background: var(--wp-card);
-  border: 1px solid var(--wp-border);
-  border-radius: var(--radius);
-  padding: 0.9rem 1rem;
-  margin-bottom: 0.55rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
+.role-picker input { accent-color: var(--green); }
+.role-picker label.choice:has(input:checked) { border-color: var(--green); background: var(--green-soft); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 12px 16px; border-radius: 10px; border: none; font-weight: 600; cursor: pointer;
+  text-decoration: none; background: var(--green); color: #fff; width: 100%;
 }
-
-.area-list li.complete { border-left: 4px solid var(--wp-green); }
-.area-list li.incomplete { border-left: 4px solid #ccc; }
-
-.area-list .area-name { font-weight: 600; }
-.area-list .area-meta { font-size: 0.78rem; color: var(--wp-muted); }
-
-.toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  align-items: center;
+.btn:hover { filter: brightness(1.05); }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.btn-secondary { background: #fff; color: var(--green-dark); border: 1px solid var(--line); }
+.btn-ghost { background: transparent; color: var(--green); border: none; width: auto; padding: 8px 0; font-weight: 600; }
+.btn-danger { background: #fff; color: var(--fail); border: 1px solid #e8c4c4; }
+.btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.btn-row .btn { width: 100%; }
+.gate-brand { text-align: center; margin: 12px 0 20px; }
+.gate-brand .logo {
+  display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px;
+  border-radius: 14px; background: var(--green); color: #fff; font-weight: 800; font-size: 22px; margin-bottom: 10px;
 }
-
-.overall-box {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
+.gate-brand h1 { margin: 0; color: var(--green-dark); font-size: 1.6rem; }
+.gate-brand p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+.link-back { display: block; text-align: center; margin-top: 16px; font-size: 14px; font-weight: 600; }
+.area-nav {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  margin-bottom: 12px; font-size: 13px; color: var(--muted);
 }
-
-.overall-box input[type="number"] {
-  width: 5rem;
-  padding: 0.5rem;
-  border: 1px solid var(--wp-border);
-  border-radius: 8px;
-  text-align: center;
-  font-weight: 700;
-  font-size: 1.1rem;
+.checklist-item {
+  border: 1px solid var(--line); border-radius: 10px; padding: 10px; margin-bottom: 8px; background: #fff;
 }
-
-/* —— Area detail —— */
-.photo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-  gap: 0.5rem;
-  margin: 0.75rem 0;
+.checklist-item .label { font-weight: 600; margin-bottom: 8px; }
+.result-toggle { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 8px; }
+.result-toggle button {
+  padding: 8px; border-radius: 8px; border: 1px solid var(--line); background: #fff;
+  cursor: pointer; font-weight: 600; font-size: 13px;
 }
-
-.photo-grid .thumb {
-  position: relative;
-  aspect-ratio: 1;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid var(--wp-border);
-  background: #eee;
+.result-toggle button.active.pass { background: var(--green-soft); border-color: var(--pass); color: var(--pass); }
+.result-toggle button.active.fail { background: #fdeaea; border-color: var(--fail); color: var(--fail); }
+.result-toggle button.active.na { background: #eee; border-color: #999; color: #555; }
+.photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
+.photo-thumb {
+  position: relative; aspect-ratio: 1; border-radius: 8px; overflow: hidden;
+  border: 1px solid var(--line); background: #ddd;
 }
-
-.photo-grid .thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+.photo-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.photo-thumb .cap {
+  position: absolute; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.55);
+  color: #fff; font-size: 9px; padding: 2px 4px;
 }
-
-.photo-grid .thumb .remove-photo {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 24px;
-  height: 24px;
-  border: none;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.65);
-  color: #fff;
-  font-size: 14px;
-  line-height: 1;
-  cursor: pointer;
-  padding: 0;
+.photo-thumb .rm {
+  position: absolute; top: 2px; right: 2px; width: 22px; height: 22px; border: none;
+  border-radius: 50%; background: rgba(0,0,0,0.55); color: #fff; font-size: 14px;
+  line-height: 1; cursor: pointer; padding: 0;
 }
-
-.score-slider-wrap {
-  margin: 0.75rem 0;
+.file-btn {
+  display: inline-flex; align-items: center; justify-content: center; padding: 10px 12px;
+  border-radius: 10px; border: 1px dashed var(--green); color: var(--green-dark);
+  background: var(--green-soft); font-weight: 600; cursor: pointer; width: 100%;
 }
-
-.score-slider-wrap input[type="range"] {
-  width: 100%;
-  accent-color: var(--wp-green);
+.file-btn input { display: none; }
+.score-big { font-size: 2rem; font-weight: 800; color: var(--green); letter-spacing: -0.02em; }
+.score-bar { height: 8px; background: #e0ebe4; border-radius: 999px; overflow: hidden; margin: 8px 0 0; }
+.score-bar > span { display: block; height: 100%; background: var(--green); }
+.section-label {
+  font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--muted); margin: 18px 0 8px;
 }
-
-.score-display {
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--wp-green);
-  text-align: center;
+.empty {
+  padding: 20px; text-align: center; color: var(--muted); font-size: 14px;
+  border: 1px dashed var(--line); border-radius: var(--radius);
 }
-
-textarea.notes {
-  width: 100%;
-  min-height: 90px;
-  padding: 0.65rem 0.75rem;
-  border: 1px solid var(--wp-border);
-  border-radius: 8px;
-  resize: vertical;
+.attest-strip {
+  background: var(--green-soft); border-radius: 10px; padding: 12px;
+  font-size: 14px; color: var(--green-dark); font-weight: 600;
 }
-
-.file-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 0.5rem 0;
+.toast {
+  position: fixed; left: 50%; bottom: calc(24px + var(--safe-bottom)); transform: translateX(-50%);
+  background: var(--green-dark); color: #fff; padding: 10px 16px; border-radius: 999px;
+  font-size: 13px; z-index: 50; max-width: calc(100% - 32px); box-shadow: 0 4px 16px rgba(0,0,0,0.2);
 }
-
-.file-row label.file-btn {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.55rem 0.9rem;
-  background: #e8f0eb;
-  color: var(--wp-green-dark);
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.875rem;
-  cursor: pointer;
-}
-
-.file-row input[type="file"] { display: none; }
-
-.attest-box {
-  border: 2px dashed var(--wp-green);
-  background: #eef6f1;
-}
-
-.attest-box.locked {
-  border-style: solid;
-  background: #e8f4ec;
-}
-
-.empty-state {
-  text-align: center;
-  color: var(--wp-muted);
-  padding: 1.5rem 1rem;
-  font-size: 0.95rem;
-}
-
-.back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  color: var(--wp-green);
-  font-weight: 600;
-  font-size: 0.9rem;
-  margin-bottom: 0.75rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-.add-custom {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-}
-
-.add-custom input {
-  flex: 1;
-  padding: 0.55rem 0.7rem;
-  border: 1px solid var(--wp-border);
-  border-radius: 8px;
-}
-
-@media (min-width: 480px) {
-  .app-main { padding: 1.25rem 1.5rem; }
+.hidden { display: none !important; }
+@media (min-width: 600px) {
+  #app { padding-top: 24px; }
+  .app-header h1 { font-size: 1.5rem; }
 }
