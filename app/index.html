@@ -4,19 +4,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#1f6b45">
-  <meta name="description" content="WalkProof internal demo — walkthrough QC for building-service contractors. Not a licensed inspection.">
+  <meta name="description" content="WalkProof internal demo — photo’d, scored walks with supervisor attest. Not a licensed inspection.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <title>WalkProof Demo</title>
   <link rel="manifest" href="./manifest.webmanifest">
-  <link rel="icon" href="./icon-192.png" type="image/png">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
   <link rel="apple-touch-icon" href="./icon-192.png">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
   <div id="app"></div>
-  <footer class="legal-footer" id="legal-footer">
-    WalkProof does not certify that a building is clean, safe, or code-compliant. Not a licensed inspection. Supervisor attestation is the customer’s.
-  </footer>
   <script src="./vendor/jspdf.umd.min.js"></script>
   <script src="./app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./sw.js").catch(function(){});
+    }
+  </script>
 </body>
 </html>
