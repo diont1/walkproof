@@ -1,7 +1,7 @@
 {
   "name": "WalkProof",
   "short_name": "WalkProof",
-  "description": "Cleaning walk documentation demo — not a certified inspection.",
+  "description": "Walkthrough QC demo for building-service contractors. Not a licensed inspection.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
