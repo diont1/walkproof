@@ -1,180 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#1f6b45" />
-  <meta name="description" content="WalkProof demo — cleaning walk documentation. Not a certified inspection." />
-  <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
-  <link rel="apple-touch-icon" href="icon-192.png" />
-  <title>WalkProof</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1f6b45">
+  <meta name="description" content="WalkProof internal demo — walkthrough QC for building-service contractors. Not a licensed inspection.">
+  <title>WalkProof Demo</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <!-- LOGIN -->
-  <div id="screen-login" class="screen">
-    <div class="login-card">
-      <div class="login-brand">
-        <div class="logo-mark" aria-hidden="true">WP</div>
-        <h1>WalkProof</h1>
-        <p>Local demo · Acme Building Services</p>
-      </div>
-      <div class="demo-creds">
-        <strong>Demo accounts</strong>
-        Inspectors: <code>inspector1</code> / <code>demo</code>,
-        <code>inspector2</code> / <code>demo</code><br />
-        Supervisor: <code>supervisor</code> / <code>demo</code>
-      </div>
-      <form id="login-form" autocomplete="on">
-        <div class="field">
-          <label for="login-user">Username</label>
-          <input id="login-user" name="username" type="text" required autocomplete="username" />
-        </div>
-        <div class="field">
-          <label for="login-pass">Password</label>
-          <input id="login-pass" name="password" type="password" required autocomplete="current-password" />
-        </div>
-        <p id="login-error" class="error-msg" role="alert"></p>
-        <button type="submit" class="btn btn-primary">Log in</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- APP SHELL -->
-  <div id="screen-app" class="screen hidden">
-    <header class="app-header">
-      <div class="brand">WalkProof</div>
-      <div class="user-chip">
-        <span id="hdr-user">—</span>
-        <span class="role" id="hdr-role"></span>
-      </div>
-    </header>
-
-    <main class="app-main">
-      <!-- HOME -->
-      <section id="view-home" class="view active">
-        <h2 class="view-title" id="home-company">Acme Building Services</h2>
-        <p class="view-sub">Site: Tower B · Floors 2–4</p>
-        <div class="card">
-          <h3>Start a walk</h3>
-          <p style="margin:0 0 0.75rem;font-size:0.9rem;color:var(--wp-muted)">
-            Seed checklist: Men’s restroom 2, Women’s restroom 3, Lobby / entry, Break room.
-            Add custom areas during the walk.
-          </p>
-          <button type="button" class="btn btn-primary" id="btn-start-walk">Start Tower B walk</button>
-        </div>
-        <h3 style="margin:1.25rem 0 0.5rem;font-size:1rem;color:var(--wp-green-dark)">Prior walks</h3>
-        <ul class="walk-list" id="walk-list"></ul>
-        <p id="walk-list-empty" class="empty-state hidden">No walks yet. Start one above.</p>
-        <div class="row-actions" style="margin-top:1rem">
-          <button type="button" class="btn btn-ghost btn-sm" id="btn-logout">Log out</button>
-        </div>
-      </section>
-
-      <!-- WALK OVERVIEW -->
-      <section id="view-walk" class="view">
-        <button type="button" class="back-link" id="btn-back-home">← Home</button>
-        <h2 class="view-title">Tower B walk</h2>
-        <p class="view-sub" id="walk-meta">—</p>
-
-        <div class="card">
-          <div class="overall-box">
-            <div>
-              <div style="font-size:0.8rem;font-weight:600;color:var(--wp-muted)">Overall score</div>
-              <input type="number" id="overall-score" min="0" max="100" step="1" />
-            </div>
-            <button type="button" class="btn btn-secondary btn-sm" id="btn-auto-overall">Auto from areas</button>
-            <span class="badge" id="walk-status-badge">Open</span>
-          </div>
-        </div>
-
-        <h3 style="margin:0.5rem 0;font-size:1rem;color:var(--wp-green-dark)">Areas</h3>
-        <ul class="area-list" id="area-list"></ul>
-
-        <div class="card">
-          <h3>Add custom area</h3>
-          <div class="add-custom">
-            <input type="text" id="custom-area-name" placeholder="e.g. Trash room floor 2" maxlength="80" />
-            <button type="button" class="btn btn-secondary btn-sm" id="btn-add-area">Add</button>
-          </div>
-          <p style="margin:0.5rem 0 0;font-size:0.75rem;color:var(--wp-muted)">
-            Template hints: Men’s restroom, Women’s restroom, Lobby, Trash, Floor corridor
-          </p>
-        </div>
-
-        <div class="card attest-box" id="attest-card">
-          <h3>Supervisor attest</h3>
-          <p style="margin:0 0 0.75rem;font-size:0.85rem;color:var(--wp-muted)">
-            Supervisor confirms this walk record was reviewed. Not a licensed inspection.
-          </p>
-          <div id="attest-form">
-            <div class="field">
-              <label for="attest-name">Attesting name</label>
-              <input id="attest-name" type="text" maxlength="80" placeholder="Full name" />
-            </div>
-            <button type="button" class="btn btn-primary" id="btn-attest">Attest walk</button>
-            <p id="attest-hint" class="error-msg" style="margin-top:0.5rem"></p>
-          </div>
-          <div id="attest-done" class="hidden">
-            <p style="margin:0;font-weight:600;color:var(--wp-green-dark)" id="attest-summary"></p>
-          </div>
-        </div>
-
-        <div class="row-actions">
-          <button type="button" class="btn btn-primary" id="btn-download-pdf">Download PDF</button>
-          <button type="button" class="btn btn-secondary" id="btn-mark-complete">Mark walk complete</button>
-        </div>
-      </section>
-
-      <!-- AREA DETAIL -->
-      <section id="view-area" class="view">
-        <button type="button" class="back-link" id="btn-back-walk">← Walk</button>
-        <h2 class="view-title" id="area-title">Area</h2>
-        <p class="view-sub" id="area-floor-hint"></p>
-
-        <div class="card">
-          <div class="score-slider-wrap">
-            <div class="score-display" id="area-score-display">—</div>
-            <label for="area-score" style="display:block;text-align:center;font-size:0.8rem;color:var(--wp-muted);margin-bottom:0.35rem">
-              Score 0–100
-            </label>
-            <input type="range" id="area-score" min="0" max="100" value="80" />
-          </div>
-          <div class="field">
-            <label for="area-notes">Notes</label>
-            <textarea id="area-notes" class="notes" placeholder="Observations, issues, follow-ups…"></textarea>
-          </div>
-          <div>
-            <label style="font-size:0.8rem;font-weight:600;color:var(--wp-muted)">Photos</label>
-            <div class="file-row">
-              <label class="file-btn">
-                Capture
-                <input type="file" id="photo-capture" accept="image/*" capture="environment" />
-              </label>
-              <label class="file-btn">
-                Choose file
-                <input type="file" id="photo-file" accept="image/*" multiple />
-              </label>
-            </div>
-            <div class="photo-grid" id="photo-grid"></div>
-          </div>
-          <div class="row-actions">
-            <button type="button" class="btn btn-primary" id="btn-save-area">Save &amp; mark complete</button>
-            <button type="button" class="btn btn-secondary" id="btn-save-area-draft">Save draft</button>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="app-footer">
-      WalkProof does not certify that a building is clean, safe, or code-compliant.
-      This is not a licensed inspection. Supervisor attests to the walk record only.
-      Demo data stays in this browser (IndexedDB). No GPS. $0 demo — no payments.
-    </footer>
-  </div>
-
-  <script src="vendor/jspdf.umd.min.js"></script>
-  <script src="app.js"></script>
+  <div id="app"></div>
+  <footer class="legal-footer" id="legal-footer">
+    WalkProof does not certify that a building is clean, safe, or code-compliant. Not a licensed inspection. Supervisor attestation is the customer’s.
+  </footer>
+  <script src="./vendor/jspdf.umd.min.js"></script>
+  <script src="./app.js"></script>
 </body>
 </html>
